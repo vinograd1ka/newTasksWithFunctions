@@ -68,10 +68,7 @@
 
     var substituteElement = function (array, change, whatToChange) {
         return array.map(function(item){
-            if (item === change){
-                item = whatToChange;
-            }
-            return item;
+            return item === change ? whatToChange : item
         });
     }
 
@@ -89,20 +86,19 @@
             return item === val;
         });
 
-        if(findEl1 === undefined)return false;
 
-        else return findEl2 !== undefined;
+        return !!findEl1 && !!findEl2
     }
 
-    var result8 = arraysHasElement([4, 2, 1], [1, 4, 3], 4);
+    var result8 = arraysHasElement([true, false, 5], [5, 1, 5], 5);
     console.log(result8);
 
     //1 COMPLETE
 
     function filterFalsyValues(array) {
         return array.filter(function(item){
-            return  item !== 0 &&  item !== null &&  item !== false &&  item !== undefined;
-        }, 0);
+            return  item ;
+            }, 0);
     }
 
     var result11 = filterFalsyValues([5, 'asd', false, true, undefined, NaN, null, 'true']);
@@ -111,15 +107,13 @@
     //2 COMPLETE
 
     function getMultipliedBigNumbers(array){
-        var itemMap = array.map(function(item){
+        return array.map(function(item){
             return item*item;
-        });
-
-        return itemMap.filter(function(item){
+        }).filter(function(item){
             return item >= 1000;
         });
-
     }
+
     var result12 = getMultipliedBigNumbers([32, 42, 55, 5, 10]);
     console.log(result12);
 
@@ -143,14 +137,12 @@
     //4 COMPLETE
 
     function reverseArray(array) {
-        if(array.length >= 5){
-            return array.reduce(function(result, item, i, array){
-                return array.reverse();
-            }, 0);
-        }
-        else{
-            return array;
-        }
+        var reduceFunction =  array.reduce(function(result, item, i, array){
+            return array.reverse();
+        }, 0);
+
+        return array.length >= 5 ? reduceFunction : array;
+
     }
     var result14 = reverseArray([5, 2, 6, 8, 9]);
     console.log(result14);
@@ -186,26 +178,25 @@
     var result22 = getArraysNotEqualElementsCount([1, 2, 3], [1, 5, 1]);
     console.log(result22);
 
-    //3 COMPLETE
+    //3
 
     function getArrayEqualElementCountHard(array1 ,array2) {
-        var count = 0;
-        array1.reduce(function(result, item, index) {
+        var beforeReduce = array2.length;
+        var arrayReduce = array1.reduce(function(result, item, index) {
             var findEl = result.findIndex(function(findItem){
                 return item === findItem;
             });
 
             if(findEl !== -1){
                 result.splice(findEl, 1);
-                count++;
             }
-
             return result;
         }, array2);
-        return count;
+        var afterReduce = arrayReduce.length;
+        return beforeReduce - afterReduce;
     }
 
-    var result23 = getArrayEqualElementCountHard([1, 2, 3], [3, 2, 1]);
+    var result23 = getArrayEqualElementCountHard([1, 2, 3, 'e', 'e', 'd', 'e', 'e', 'd'], ['a', 'b', 'c', 'd', 'e']);
     console.log(result23);
 
     //4 COMPLETE
