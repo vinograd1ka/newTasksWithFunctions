@@ -98,7 +98,7 @@
     function filterFalsyValues(array) {
         return array.filter(function(item){
             return  item ;
-            }, 0);
+            });
     }
 
     var result11 = filterFalsyValues([5, 'asd', false, true, undefined, NaN, null, 'true']);
@@ -137,12 +137,7 @@
     //4 COMPLETE
 
     function reverseArray(array) {
-        var reduceFunction =  array.reduce(function(result, item, i, array){
-            return array.reverse();
-        }, 0);
-
-        return array.length >= 5 ? reduceFunction : array;
-
+        return array.length >= 5 ? array.reverse() : array;
     }
     var result14 = reverseArray([5, 2, 6, 8, 9]);
     console.log(result14);
